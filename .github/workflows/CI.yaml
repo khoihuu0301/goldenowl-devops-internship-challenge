@@ -23,6 +23,7 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
-          docker build -t $DOCKERHUB_USERNAME/my-node-app:latest .
+          cd src
+          docker build -t $DOCKERHUB_USERNAME/goldenowltest:latest .
           echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-          docker push $DOCKERHUB_USERNAME/my-node-app:latest
+          docker push $DOCKERHUB_USERNAME/goldenowltest:latest
