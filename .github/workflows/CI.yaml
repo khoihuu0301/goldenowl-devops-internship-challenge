@@ -34,5 +34,5 @@ jobs:
           
           echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
           gcloud auth activate-service-account --key-file=gcp-key.json          
-          gcloud compute ssh instance-1 --zone=asia-southeast1-b --command "~/deploy.sh"
+          gcloud compute ssh instance-1 --zone=asia-southeast1-b --project goldenowl --command "~/deploy.sh"
           rm gcp-key.json
