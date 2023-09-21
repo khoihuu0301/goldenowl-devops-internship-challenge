@@ -27,3 +27,12 @@ jobs:
           docker build -t $DOCKERHUB_USERNAME/goldenowltest:latest .
           echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
           docker push $DOCKERHUB_USERNAME/goldenowltest:latest
+        - name: Deploy to Google Cloud VM
+        env:
+          GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+        run: |
+          
+          echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
+          gcloud auth activate-service-account --key-file=gcp-key.json          
+          gcloud compute ssh instance-1 --zone=asia-southeast1-b --command "~/deploy.sh"
+          rm gcp-key.json
